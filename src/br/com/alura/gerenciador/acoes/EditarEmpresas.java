@@ -8,10 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.alura.gerenciador.interfaces.Acao;
 import br.com.alura.gerenciador.models.Banco;
 import br.com.alura.gerenciador.models.Empresa;
 
-public class EditarEmpresas {
+public class EditarEmpresas implements Acao {
 	public String executar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
@@ -25,7 +26,7 @@ public class EditarEmpresas {
 			empresaAtualizada.setDataAbertura(sdf.parse(request.getParameter("data")));
 			request.setAttribute("empresaAtualizada", empresaAtualizada);
 
-			return "redirect:entrada?acao=listarEmpresas";
+			return "redirect:entrada?acao=ListarEmpresas";
 			
 		} catch (ParseException e) {
 			throw new ServletException(e);

@@ -11,7 +11,7 @@
 	<form action="${novaEmpresaCtx}" method="post">
 		Nome: <input type="text" name="nome"/>
 		Data Abertura: <input type="text" name="data"/>
-		<input type="hidden" name="acao" value="novasEmpresas"/>
+		<input type="hidden" name="acao" value="NovasEmpresas"/>
 		<input type="submit" value="salvar"/>
 	</form>
 </body>
