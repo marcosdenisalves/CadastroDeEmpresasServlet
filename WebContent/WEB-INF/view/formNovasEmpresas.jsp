@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:import url="template.jsp"/>
 	<form action="${novaEmpresaCtx}" method="post">
 		Nome: <input type="text" name="nome"/>
 		Data Abertura: <input type="text" name="data"/>

@@ -8,9 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Java Standard Taglib</title>
+<title>Empresas Cadastradas</title>
 </head>
 <body>
+	<c:import url="template.jsp"/>
 	<div>
 		<c:if test="${not empty empresa}">
 			A empresa ${ empresa } foi cadastrada com sucesso!

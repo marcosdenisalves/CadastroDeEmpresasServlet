@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.alura.gerenciador.interfaces.Acao;
+import br.com.alura.gerenciador.validations.UsuarioLogado;
 
 @WebServlet("/entrada")
 public class Controller extends HttpServlet {
@@ -20,6 +21,11 @@ public class Controller extends HttpServlet {
 	@SuppressWarnings("rawtypes")
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		if (UsuarioLogado.acessoNegado(request, response)) {
+			response.sendRedirect("entrada?acao=LoginForm");
+			return;
+		}
 
 		try {
 			String nomeDaClasse = pacote + request.getParameter("acao");
