@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.alura.gerenciador.interfaces.Acao;
 import br.com.alura.gerenciador.models.Banco;
 
-public class ListarEmpresas implements Acao{
+public class ListarEmpresas implements Acao {
 
 	public String executar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

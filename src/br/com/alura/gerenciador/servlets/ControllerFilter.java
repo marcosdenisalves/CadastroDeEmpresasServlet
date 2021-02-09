@@ -2,32 +2,29 @@ package br.com.alura.gerenciador.servlets;
 
 import java.io.IOException;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.alura.gerenciador.interfaces.Acao;
-import br.com.alura.gerenciador.validations.UsuarioLogado;
 
-@WebServlet("/entrada")
-public class Controller extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class ControllerFilter implements Filter {
 	
 	private static String pacote = "br.com.alura.gerenciador.acoes.";
 	
 	@SuppressWarnings("rawtypes")
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		if (UsuarioLogado.acessoNegado(request, response)) {
-			response.sendRedirect("entrada?acao=LoginForm");
-			return;
-		}
-
+	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
+			throws IOException, ServletException {
+		
 		try {
+			HttpServletRequest request = (HttpServletRequest) servletRequest;
+			HttpServletResponse response = (HttpServletResponse) servletResponse;
+		
 			String nomeDaClasse = pacote + request.getParameter("acao");
 			Class classe = Class.forName(nomeDaClasse);
 			Acao acao = (Acao) classe.newInstance();
@@ -40,7 +37,7 @@ public class Controller extends HttpServlet {
 			}else {
 				response.sendRedirect(split[1]);
 			}
-
+			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
