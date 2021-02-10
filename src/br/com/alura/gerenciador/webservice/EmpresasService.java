@@ -20,23 +20,32 @@ import br.com.alura.gerenciador.models.Empresa;
 public class EmpresasService extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 1L;
 
-	
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		List<Empresa> empresas = new Banco().getListaEmpresas();
 
-		XStream xstream = new XStream();
-		xstream.alias("empresa", Empresa.class);
-		String xml = xstream.toXML(empresas);
+		String valor = request.getHeader("Accept");
 		
-		response.setContentType("application/xml");
-		response.getWriter().print(xml);
-		
-		Gson gson = new Gson();
-		String json = gson.toJson(empresas);
-		
-		response.setContentType("application/json");
-		response.getWriter().print(json);
+		System.out.println(valor);
+
+		if (valor.contains("xml")) {
+			XStream xstream = new XStream();
+			xstream.alias("empresa", Empresa.class);
+			String xml = xstream.toXML(empresas);
+
+			response.setContentType("application/xml");
+			response.getWriter().print(xml);
+			
+		} else if (valor.contains("json")) {
+			Gson gson = new Gson();
+			String json = gson.toJson(empresas);
+
+			response.setContentType("application/json");
+			response.getWriter().print(json);
+		} else {
+			response.setContentType("application/json");
+			response.getWriter().print("{'message:'no content'}");
+		}
 	}
 }
