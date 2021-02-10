@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -16,6 +17,14 @@ import br.com.alura.gerenciador.interfaces.Acao;
 public class ControllerFilter implements Filter {
 	
 	private static String pacote = "br.com.alura.gerenciador.acoes.";
+
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+	}
+	
+	@Override
+	public void destroy() {
+	}
 	
 	@SuppressWarnings("rawtypes")
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
